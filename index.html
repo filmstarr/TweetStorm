@@ -4,6 +4,7 @@
 
     </head>
     <body>
+        <h1 class="title">Tweet Storm ⛈️</h1>
         <div class="loader-wrapper">
             <div class="loader"></div>
             <div class="loader-text">Loading...</div>
@@ -40,7 +41,17 @@
     var loading = true;
     var loadTime = new Date();
 
+    socket.on('config', function(data) {
+        var hashtagString = ":";
+        data.hashtags.forEach(x => {
+            hashtagString += " <a href='http://twitter.com/hashtag/" + x + "' target='_blank'>#" + x + "</a>"
+        });
+
+        $(".title").html(data.title + hashtagString);
+    });
+
     socket.on('tweet', function(data) {
+        console.log(data);
         newTweets.push(data);
         if (loading)
         {

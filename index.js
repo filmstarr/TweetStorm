@@ -5,6 +5,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var tweetToHTML = require('tweet-to-html');
 var moment = require('moment');
+var Twit = require('twit')
 
 app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/public'));
@@ -14,25 +15,28 @@ app.get('/', function(req, res, next) {
 
 server.listen(config.webserver.port);
 
-var Twit = require('twit')
-
-var T = new Twit(config.twitter)
+var twit = new Twit(config.twitter)
 
 var tweetCache = [];
 
-T.get('search/tweets', { q: config.hashtag, count: config.tweet_cache_size, result_type: "recent" }, function(err, data, response) {
+var hashtags = config.hashtags.replace(/#/g, "").split(/[\s,]+/).filter(function(x) { return x !== "" && x !== null; });
+var hashtagString = "#" + hashtags.join(", #");
+console.log(hashtagString);
+
+twit.get('search/tweets', { q: hashtagString, count: config.tweet_cache_size, result_type: "recent", language: config.language }, function(err, data, response) {
     var tweets = data.statuses.sort(function(a, b) { return moment(a.created_at, "dd MMM DD HH:mm:ss ZZ YYYY", "en").unix() - moment(b.created_at, "dd MMM DD HH:mm:ss ZZ YYYY", "en").unix(); } );
     tweetCache = tweetToHTML.parse(data.statuses);
 });
 
 io.on('connection', function(client) {  
     console.log('Client connected...');
+    client.emit('config', { "title": config.title, "hashtags": hashtags, "tweet_cache_size": config.tweet_cache_size });
     tweetCache.forEach(function(tweet) {
         client.emit('tweet', tweet);
     });
 });
 
-var stream = T.stream('statuses/filter', { track: config.hashtag, language: 'en' })
+var stream = twit.stream('statuses/filter', { track: hashtagString, language: config.language })
 
 stream.on('tweet', function (tweet) {
     var htmlTweet = tweetToHTML.parse(tweet);
