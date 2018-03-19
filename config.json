@@ -12,5 +12,6 @@
     "webserver": {
         "port": 4200
     },
-    "tweet_cache_size": 50
+    "tweet_cache_size": 50,
+    "scrollable": false
 }

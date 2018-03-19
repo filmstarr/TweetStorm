@@ -21,7 +21,6 @@ var tweetCache = [];
 
 var hashtags = config.hashtags.replace(/#/g, "").split(/[\s,]+/).filter(function(x) { return x !== "" && x !== null; });
 var hashtagString = "#" + hashtags.join(", #");
-console.log(hashtagString);
 
 twit.get('search/tweets', { q: hashtagString, count: config.tweet_cache_size, result_type: "recent", language: config.language }, function(err, data, response) {
     var tweets = data.statuses.sort(function(a, b) { return moment(a.created_at, "dd MMM DD HH:mm:ss ZZ YYYY", "en").unix() - moment(b.created_at, "dd MMM DD HH:mm:ss ZZ YYYY", "en").unix(); } );
@@ -30,7 +29,7 @@ twit.get('search/tweets', { q: hashtagString, count: config.tweet_cache_size, re
 
 io.on('connection', function(client) {  
     console.log('Client connected...');
-    client.emit('config', { "title": config.title, "hashtags": hashtags, "tweet_cache_size": config.tweet_cache_size });
+    client.emit('config', { "title": config.title, "hashtags": hashtags, "tweet_cache_size": config.tweet_cache_size, "scrollable": config.scrollable });
     tweetCache.forEach(function(tweet) {
         client.emit('tweet', tweet);
     });

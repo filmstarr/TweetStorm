@@ -2,7 +2,7 @@ body {
   margin: 0;
   overflow: hidden;
   padding: 5px;
-  background-image: url("/background.jpg")
+  background-image: url("/images/background.jpg")
 }
 
 h1 {
@@ -20,6 +20,17 @@ h1 a {
 
 h1 a:hover {
     text-decoration: underline;
+}
+
+.fullscreen {
+    color: white;
+    font-size: 80px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    margin-top: 0px;
+    margin-right: 0px;
+    cursor: pointer;
 }
 
 div.twitter-tweet {

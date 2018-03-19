@@ -9,18 +9,39 @@
             <div class="loader"></div>
             <div class="loader-text">Loading...</div>
         </div>
+
+        <div class="fullscreen">
+            <i class="fas fa-arrows-alt fullscreen"></i>
+        </div>
+
         <div id="future" class="grid">
             <div class="grid-sizer"></div>
         </div>
-        <link rel="stylesheet" href="/tweets.css">
+        <link rel="stylesheet" href="/css/tweets.css">
         <script src="/jquery/dist/jquery.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/masonry-layout/dist/masonry.pkgd.min.js"></script>
         <script src="/imagesloaded/imagesloaded.pkgd.min.js"></script>
+        <script src="/screenfull/dist/screenfull.js"></script>
+        <script src="/js/fontawesome.min.js"></script>
+        <script src="/js/fa-solid.min.js"></script>
     </body>
 </html>
 
 <script>
+    if (screenfull.enabled) {
+        screenfull.on('change', () => {
+            if (screenfull.isFullscreen) {
+                $(".fullscreen").hide();
+            } else {
+                $(".fullscreen").show();
+            }
+        });
+
+        $(".fullscreen").click(function() {
+            screenfull.request();
+        });
+    }
 
     var grid = $('#future').masonry({
     // options
@@ -48,10 +69,16 @@
         });
 
         $(".title").html(data.title + hashtagString);
+
+        tweetCapacity = data.tweetCapacity;
+        if (data.scrollable) {
+            $("body").css("overflow-y", "scroll");
+        } else {
+            $("body").css("overflow-y", "hidden");            
+        }
     });
 
     socket.on('tweet', function(data) {
-        console.log(data);
         newTweets.push(data);
         if (loading)
         {
