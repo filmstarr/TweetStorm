@@ -1,0 +1,21 @@
+{
+  "name": "tweetstorm",
+  "version": "1.0.0",
+  "description": "A Twitter Hashtag Viewer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ross Huelin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "imagesloaded": "^4.1.4",
+    "jquery": "^3.3.1",
+    "masonry-layout": "^4.2.1",
+    "moment": "^2.21.0",
+    "socket.io": "^2.0.4",
+    "tweet-to-html": "^1.0.2",
+    "twit": "^2.2.9"
+  }
+}

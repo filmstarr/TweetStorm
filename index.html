@@ -1,0 +1,81 @@
+<!doctype html>  
+<html lang="en">  
+    <head>
+
+    </head>
+    <body>
+        <div class="loader-wrapper">
+            <div class="loader"></div>
+            <div class="loader-text">Loading...</div>
+        </div>
+        <div id="future" class="grid">
+            <div class="grid-sizer"></div>
+        </div>
+        <link rel="stylesheet" href="/tweets.css">
+        <script src="/jquery/dist/jquery.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/masonry-layout/dist/masonry.pkgd.min.js"></script>
+        <script src="/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    </body>
+</html>
+
+<script>
+
+    var grid = $('#future').masonry({
+    // options
+        itemSelector: '.post',
+        columnWidth: '.grid-sizer',
+        transitionDuration: 800,
+        stagger: 30
+    });
+
+    var socket = io.connect('http://localhost:4200');
+    socket.on('connect', function(data) {
+       console.log("Connected to server")
+    });
+
+    var tweetCapacity = 50;
+    var tweets = [];
+    var newTweets = [];
+    var loading = true;
+    var loadTime = new Date();
+
+    socket.on('tweet', function(data) {
+        newTweets.push(data);
+        if (loading)
+        {
+            $(".loader-wrapper").hide();
+            update();
+            if (tweets.length === tweetCapacity || (new Date()) - loadTime > 10000)
+            {
+                loading = false;
+            }
+        }
+    });
+
+    var update = function() {
+        while (newTweets.length > 0) {
+            var data = newTweets.shift();
+
+            var randomWidth = Math.floor(Math.random() * 11) + 10;
+
+            if (data.hasOwnProperty("entities") && data.entities.hasOwnProperty("media") && data.entities.media.length >= 1) {
+                randomWidth += 5;
+            }
+            var tweet = $("<div class='post' style='max-width: " + randomWidth + "%;'><div class='twitter-tweet'>" + data.html + "</div></div>");
+            tweets.push(tweet);
+            tweet.imagesLoaded().progress(function() {
+                grid.masonry();
+            })
+            grid.prepend(tweet).masonry('prepended', tweet );
+            if (tweets.length > tweetCapacity)
+            {
+                oldTweet = tweets.shift();
+                grid.masonry('remove', oldTweet );
+            }
+        }
+    };
+
+    setInterval(update, 5000);
+
+</script>  

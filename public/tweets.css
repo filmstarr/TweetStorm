@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  padding: 5px;
+  background-image: url("/background.jpg")
+}
+
+div.twitter-tweet {
+    font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    background-color: white;
+    border-color: #eee #ddd #bbb;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    margin: 5px;
+    padding: 10px;
+    float: left;
+  }
+
+  .grid-sizer { width: 1%; }
+
+  .post { max-width: 20%; }
+
+  div.twitter-tweet p {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 20px;
+  }
+  
+  div.twitter-tweet a {
+    color: inherit;
+    font-weight: normal;
+    text-decoration: none;
+    outline: 0 none;
+  }
+  
+  div.twitter-tweet a:hover,
+  div.twitter-tweet a:focus {
+    text-decoration: underline;
+  }
+
+  div.twitter-tweet video, div.twitter-tweet img {
+      display: block;
+      max-width: 100%;
+  }
+
+  div.twitter-tweet img.emoji {
+    display: initial;
+    max-height: 16px;
+  }
+
+  /* Loading */
+.loader,
+.loader:after {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.loader-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -40px;
+    margin-left: -225px;
+    display: flex;
+    font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+    font-size: 80px;
+    color: white;
+    line-height: 80px;
+}
+
+.loader-text {
+  padding-left: 20px;
+}
+
+.loader {
+    font-size: 6px;    
+    text-indent: -9999em;
+    border-top: 1.1em solid rgba(255, 255, 255, 0.4);
+    border-right: 1.1em solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1.1em solid rgba(255, 255, 255, 0.4);
+    border-left: 1.1em solid rgba(255, 255, 255, 1.0);
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

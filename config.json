@@ -1,0 +1,14 @@
+{
+    "hashtag": "#yourHashTag",
+    "twitter": {
+        "consumer_key": "yourConsumerKey",
+        "consumer_secret": "yourCustomerSecret",
+        "access_token": "yourAccessToken",
+        "access_token_secret": "yourAccessTokenSecret",
+        "timeout_ms": 60000
+    },
+    "webserver": {
+        "port": 4200
+    },
+    "tweet_cache_size": 50
+}
