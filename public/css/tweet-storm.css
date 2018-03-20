@@ -1,10 +1,12 @@
+/* Body */
 body {
-  margin: 0;
-  overflow: hidden;
-  padding: 5px;
-  background-image: url("/images/background.jpg")
+    margin: 0;
+    overflow: hidden;
+    padding: 5px;
+    background-image: url("/images/background.jpg")
 }
 
+/* Title */
 h1 {
     font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
     font-size: 80px;
@@ -22,6 +24,7 @@ h1 a:hover {
     text-decoration: underline;
 }
 
+/* Fullscreen */
 .fullscreen {
     color: white;
     font-size: 80px;
@@ -33,55 +36,7 @@ h1 a:hover {
     cursor: pointer;
 }
 
-div.twitter-tweet {
-    font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 16px;
-    background-color: white;
-    border-color: #eee #ddd #bbb;
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    margin: 5px;
-    padding: 10px;
-    float: left;
-  }
-
-  .grid-sizer { width: 1%; }
-
-  .post { max-width: 20%; }
-
-  div.twitter-tweet p {
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 20px;
-  }
-  
-  div.twitter-tweet a {
-    color: inherit;
-    font-weight: normal;
-    text-decoration: none;
-    outline: 0 none;
-  }
-  
-  div.twitter-tweet a:hover,
-  div.twitter-tweet a:focus {
-    text-decoration: underline;
-  }
-
-  div.twitter-tweet video, div.twitter-tweet img {
-      display: block;
-      max-width: 100%;
-  }
-
-  div.twitter-tweet img.emoji {
-    display: initial;
-    max-height: 16px;
-  }
-
-  /* Loading */
+/* Loading */
 .loader,
 .loader:after {
     border-radius: 50%;
@@ -142,4 +97,57 @@ div.twitter-tweet {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+}
+
+/* Posts */
+.post-container {
+    max-width: 20%;
+}
+
+.post {
+    font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    background-color: white;
+    border-color: #eee #ddd #bbb;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    margin: 5px;
+    padding: 10px;
+    float: left;
+  }
+
+.post p {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.post a {
+    color: inherit;
+    font-weight: normal;
+    text-decoration: none;
+    outline: 0 none;
+}
+
+.post a:hover, .post a:focus {
+    text-decoration: underline;
+}
+
+.post video, .post img {
+    display: block;
+    max-width: 100%;
+}
+
+.post img.emoji {
+    display: initial;
+    max-height: 16px;
+}
+
+/* Masonry */
+.grid-sizer {
+    width: 1%;
 }

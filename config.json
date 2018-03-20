@@ -1,17 +1,18 @@
 {
     "title": "Tweet Storm ⛈️",
     "hashtags": "#yourHashTags",
-    "twitter": {
-        "consumer_key": "JpoNjauSAw6mAxRvKf8hbhExm",
-        "consumer_secret": "z7EtMjf8MVrwolnCqZPNcsnsAh5apfDfcg97hJ6y8XKoKGF6ov",
-        "access_token": "1878874639-zRrI8LVoSRhpMqxEFB5pRjPJxr6hEldQ2tnqVKN",
-        "access_token_secret": "L3iiIDLu5h19m9eIMtfPZMiWxHo4cibwJR2vzLNEntdRL",
-        "timeout_ms": 60000
-    },
     "language": "en",
+    "client_refresh_rate": 5000,
+    "post_cache_size": 50,
+    "scrollable": false,
     "webserver": {
         "port": 4200
     },
-    "tweet_cache_size": 50,
-    "scrollable": false
+    "twit_config": {
+        "consumer_key": "yourConsumerKey",
+        "consumer_secret": "yourCustomerSecret",
+        "access_token": "yourAccessToken",
+        "access_token_secret": "yourAccessTokenSecret",
+        "timeout_ms": 60000
+    }
 }
