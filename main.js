@@ -25,7 +25,7 @@ var hashtagString = "#" + hashtags.join(", #");
 //Load recent posts
 twit.get('search/tweets', { q: hashtagString, count: config.tweet_cache_size, result_type: "recent", language: config.language }, function(err, data, response) {
     var tweets = data.statuses.sort(function(a, b) { return moment(a.created_at, "dd MMM DD HH:mm:ss ZZ YYYY", "en").unix() - moment(b.created_at, "dd MMM DD HH:mm:ss ZZ YYYY", "en").unix(); } );
-    postCache = tweetToHTML.parse(data.statuses);
+    postCache = tweetToHTML.parse(tweets);
 });
 
 //Subscribe to new posts
@@ -33,7 +33,9 @@ var stream = twit.stream('statuses/filter', { track: hashtagString, language: co
 stream.on('tweet', function (tweet) {
     var htmlTweet = tweetToHTML.parse(tweet);
     postCache.push(htmlTweet);
-    io.emit('post', { html: htmlTweet.html, attributes: htmlTweet.attributes } );
+    //https://gist.github.com/mathiasbynens/bbe7f870208abcfec860
+    var html = htmlTweet.html.replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/,function(e){return escape(e)});
+    io.emit('post', { html: html, attributes: htmlTweet.attributes } );
 
     //Tidy up cache
     if (postCache.length > config.tweet_cache_size)
