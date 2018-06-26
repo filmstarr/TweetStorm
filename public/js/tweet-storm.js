@@ -62,7 +62,7 @@ socket.on("config", function(config) {
 socket.on('post', function(post) {
     cache.addNewPost(post);
     if (cache.isLoading) {
-        $(".loader-wrapper").hide();
+        $(".loader").hide();
         update();
     }
 });
